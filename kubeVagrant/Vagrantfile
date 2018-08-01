@@ -1,0 +1,47 @@
+VAGRANTFILE_API_VERSION = "2"
+
+$k8s_node_count=4
+
+$ansible_memory=2096
+$ansible_cpus=1
+
+$k8s_node_memory=4096
+$k8s_node_cpus=1
+
+def workerIP(num)
+  return "172.17.8.#{num+201}"
+end
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  if Vagrant.has_plugin?("vagrant-vbguest") then
+    config.vbguest.auto_update = false
+  end
+  ip = "172.17.8.200"
+  config.ssh.insert_key = false
+  config.vm.box = "bento/ubuntu-16.04"
+  config.vm.define "ansible" do |ansible|
+    ansibleip = "#{ip}"
+    ansible.vm.network :private_network, :ip => "#{ansibleip}"
+    ansible.vm.hostname = "ansible"
+    ansible.vm.provider "virtualbox" do |v|
+      v.memory = $ansible_memory
+      v.cpus = $ansible_cpus
+    end
+    ansible.vm.provision :shell, :inline => "sed 's/127.0.0.1.*/#{ip} ansible/' -i /etc/hosts"
+    ansible.vm.provision :shell, :path => "bootstrap.sh"
+  end
+  (0..$k8s_node_count-1).each do |i|
+    config.vm.define vm_name = "k8s-0%d" % (i+1) do |node|
+      node.vm.network :private_network, :ip => "#{workerIP(i)}"
+      node.vm.hostname = vm_name
+      node.vm.provider "virtualbox" do |v|
+        v.memory = $k8s_node_memory
+        v.cpus = $k8s_node_cpus
+      end
+      node.vm.provision "shell", inline: "swapoff -a"
+      # node.vm.provision :shell, :inline => "sed 's/127.0.0.1.*k8s-0#{i+1}/#{workerIP(i)} k8s-0#{i+1}/' -i /etc/hosts"
+  #    node.vm.provision :shell, :inline => "sed   's/^name.*$/nameserver 8.8.8.8/' -i /etc/resolv.conf"
+      node.vm.provision :shell, :path => "bootstrap.sh"
+    end
+  end
+end
