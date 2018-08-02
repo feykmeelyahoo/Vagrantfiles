@@ -13,7 +13,7 @@ ansible 4 k8s ubuntu node'u ayaklandır
 >ssh-keygen -t rsa
 >ssh-copy-id vagrant@172.17.8.201 - 4'e kadar
 
-## **Set Locale**
+### **Set Locale**
 >- export LC_ALL="en_US.UTF-8"
 >- export LC_CTYPE="en_US.UTF-8"
 >- sudo dpkg-reconfigure locales
