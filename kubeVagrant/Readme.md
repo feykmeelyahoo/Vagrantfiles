@@ -9,7 +9,7 @@ ansible 4 k8s ubuntu node'u ayaklandır
 
 >- cat /etc/ssl/certs/PCAcert.pem >> /home/vagrant/.local/lib/python3.5/site-packages/pip/_vendor/certifi/cacert.pem 
 >- sudo pip install -r requirements.txt
->- sudo vi /etc/fstab # comment out swap
+>- sudo vi /etc/fstab # comment out swap veya sudo sed /swap/s/^/#/ -i /etc/fstab
 >- ssh-keygen -t rsa
 >- ssh-copy-id vagrant@172.17.8.201 - 4'e kadar
 >- sudo su -
