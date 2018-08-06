@@ -4,16 +4,16 @@ ansible 4 k8s ubuntu node'u ayaklandır
 
 ## tüm nodelarda ssh olmalı
 ## ansible makinesinde
->sudo apt install python3-pip
->sudo pip3 install --upgrade pip
+> sudo apt install python3-pip
+> sudo pip3 install --upgrade pip
 
->cat /etc/ssl/certs/PCAcert.pem >> /home/vagrant/.local/lib/python3.5/site-packages/pip/_vendor/certifi/cacert.pem 
->sudo pip install -r requirements.txt
->sudo vi /etc/fstab # comment out swap
->ssh-keygen -t rsa
->ssh-copy-id vagrant@172.17.8.201 - 4'e kadar
->sudo su -
->cat /etc/ssl/certs/PCAcert.pem >> /usr/local/lib/python3.5/dist-packages/pip/_vendor/certifi/cacert.pem
+> cat /etc/ssl/certs/PCAcert.pem >> /home/vagrant/.local/lib/python3.5/site-packages/pip/_vendor/certifi/cacert.pem 
+> sudo pip install -r requirements.txt
+> sudo vi /etc/fstab # comment out swap
+> ssh-keygen -t rsa
+> ssh-copy-id vagrant@172.17.8.201 - 4'e kadar
+> sudo su -
+> cat /etc/ssl/certs/PCAcert.pem >> /usr/local/lib/python3.5/dist-packages/pip/_vendor/certifi/cacert.pem
 
 ### **Set Locale**
 >- export LC_ALL="en_US.UTF-8"
