@@ -20,9 +20,9 @@ ansible 4 k8s ubuntu node'u ayaklandır
 >- export LC_CTYPE="en_US.UTF-8"
 >- sudo dpkg-reconfigure locales
 ### Add the following section in ansible.cfg file
->- -remote_user=vagrant
->- -cp -rfp inventory/sample inventory/prod
->- -CONFIG_FILE=inventory/prod/hosts.ini python3 contrib/inventory_builder/inventory.py 172.17.8.201 172.17.8.202 172.17.8.203 172.17.8.204
+>- remote_user=vagrant
+>- cp -rfp inventory/sample inventory/prod
+>- CONFIG_FILE=inventory/prod/hosts.ini python3 contrib/inventory_builder/inventory.py 172.17.8.201 172.17.8.202 172.17.8.203 172.17.8.204
 <!-- ### Change the value of the variable ‘boostrap_os’ from ‘none ’to ‘ubuntu’ in the file all.yml. -->
 >- vim inventory/mycluster/group_vars/all.yml
 >- sudo ufw status
