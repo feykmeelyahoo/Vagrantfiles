@@ -24,7 +24,7 @@ ansible 4 k8s ubuntu node'u ayaklandır
 >- cp -rfp inventory/sample inventory/prod
 >- CONFIG_FILE=inventory/prod/hosts.ini python3 contrib/inventory_builder/inventory.py 172.17.8.201 172.17.8.202 172.17.8.203 172.17.8.204
 <!-- ### Change the value of the variable ‘boostrap_os’ from ‘none ’to ‘ubuntu’ in the file all.yml. -->
->- vim inventory/mycluster/group_vars/all.yml
+>- vim inventory/prod/group_vars/all.yml # bootstrap_os: ubuntu
 >- sudo ufw status
 >- sudo ufw disable
 >- ansible-playbook -b -v -i inventory/prod/hosts.ini cluster.yml
